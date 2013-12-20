@@ -168,8 +168,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'pako50c10@gmail.com'
-EMAIL_HOST_PASSWORD = 'paco50C10'
+EMAIL_HOST_USER = 'CORREO AXXIS'
+EMAIL_HOST_PASSWORD = 'PASS'
 EMAIL_USE_TLS = True
 
 #identificado el perfil de los usuarios
