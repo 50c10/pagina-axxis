@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Tunasoft</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        <link rel="stylesheet" href="/static/css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="/static/css/main.css">
+
+        <script src="/static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                    <div class="navbar-header">
+                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{% url "dashboard_view"%}">Axxis</a>
+                    </div>
+
+                    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+                        {% if user.is_authenticated %}
+                            <div class="pull-right">
+                                <ul class="nav pull-right">
+                                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido, {{user.username}} <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" id="preferences"><i class="glyphicon glyphicon-cog"></i> Preferences</a></li>
+                                            <li><a href="/help/support"><i class="glyphicon glyphicon-envelope"></i> Contact Support</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{% url "logout_view"%}"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% else %}
+                        <form class="navbar-form pull-right" action="/login/" method="post" accept-charset="utf-8">
+                            {% csrf_token %}
+                            <input class="span2" type="text" placeholder="Usuario" id="id_username" name="username">
+                            <input class="span2" type="password" placeholder="Password" id="id_password" name="password">
+                            <button type="submit" class="btn">LogIn</button>
+                        </form>
+                        {% endif %}
+                    </div><!--/.nav-collapse -->
+                </div>
+        </div>
+
+        <div class="row">
+        <div class="col-md-2">
+	        <div class="row-fluid">
+	        	<!-- MEnu izquierda -->
+	        	<div class="well nav-collapse sidebar-nav">
+					
+						<ul class="nav nav-pills nav-stacked"> 
+						  <li class="nav-header">Main</li>        
+						  <li class="active"><a href="{% url "dashboard_view"%}"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
+						  <li><a href="#" id="listado"><i class="glyphicon glyphicon-edit"></i> Herramientas</a></li>
+				          <li><a href="#" id="calendario"><i class="glyphicon glyphicon-calendar"></i> Calendario</a></li>
+						  <li><a href="#" id="miembros"><i class="glyphicon glyphicon-user"></i> Miembros</a></li>
+                          <li><a href="#" id="presupuestos"><i class="glyphicon glyphicon-briefcase"></i> presupuestos </a></li>
+						  <li><a href="#"><i class="glyphicon glyphicon-comment"></i> Mensajes</a></li>
+						  <li><a href="#"><i class="glyphicon glyphicon-th-list"></i> Otro</a></li>
+						</ul>
+					
+				</div>
+	            <!-- MEnu izquierda -->
+	        </div>
+        </div>
+        <div id="content" class="col-md-10">
+        	<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Home</a> <span class="divider"/>
+					</li>
+					<li>
+						<a href="#">Dashboard</a>
+					</li>
+				</ul>
+			</div>
+        	
+            <div class="row-fluid">
+                <a href="#">
+                    <div class="span4" id ="itemproyecto">
+                        <img src="https://s3.amazonaws.com/jetstrap-site/images/website/index/what_icon.png">
+                        <p>
+                            Nuevo proyecto
+                        </p>
+                    </div>
+                </a>
+                {% if proyectos %}
+                    {% for p in proyectos %}
+                    <a href="#">
+                    <div class="span4" id ="itemproyecto">
+                        <h3>
+                            {{p.nombre}}
+                        </h3>
+                        <p>
+                            {{p.cliente}}
+                        </p>
+                    </div>
+                    </a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        </div> <!-- /container -->
+      <!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
+        <script>window.jQuery || document.write('<script src="/static/js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
+
+        <script src="/static/js/vendor/bootstrap.min.js"></script>
+
+        <script src="/static/js/main.js"></script>
+
+    </body>
+</html>

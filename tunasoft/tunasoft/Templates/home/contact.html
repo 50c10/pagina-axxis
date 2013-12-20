@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} Axxis Contacto {% endblock %}
+
+{% block content %}
+<div>
+<h3>Donde estamos:</h3>
+
+  <p>Nos encontramos en Calzada de la Cruz Roja #106, Lazaro Cardenas, 98040 Zacatecas, Zacatecas
+
+  Telefono: 1473074
+</p>
+</div>	
+<div class="row">
+	<div class="col-md-6">
+		<img src="/static/img/mapa.png">
+	</div>
+	<div class="col-md-6">
+		{% if info_enviado %}
+		<div class="alert alert-success">
+			<h2>Gracias por Comunicarte.</h2>
+			<p>Pronto nos pondremos en contacto¡¡¡¡</p>
+		</div>
+
+		{% else %}
+			<form action="." method="POST">
+				{% csrf_token %}
+				{{form.as_p}}
+				<input type="submit" value="Submit"/>
+			</form>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

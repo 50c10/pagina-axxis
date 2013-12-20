@@ -1,0 +1,122 @@
+<div>
+	<ul class="breadcrumb">
+		<li>
+			<a href="#">Home</a> <span class="divider"/>
+		</li>
+		<li>
+			<a href="#">Presupuestos</a>
+		</li>
+	</ul>
+</div>
+	<h2>Presupuestos</h2>
+<script type="text/javascript">
+$(function() {
+      var form = jQuery("#contactform");
+      form.submit(function(e) {
+          jQuery("#enviarpresu").attr('disabled', true)
+          jQuery("#respuesta").prepend('<span>Calculando. Espera... {{mensaje}}</span>')
+          jQuery("#ajaxrespuesta").load(
+              form.attr('action') + ' #ajaxrespuesta',
+              form.serializeArray(),
+              function(responseText, responseStatus) {
+                  jQuery("#enviarpresu").attr('disabled', false)
+              }
+          );
+          e.preventDefault(); 
+      });
+      });
+</script>
+	<div class="well" id="respuesta">
+    {{mensaje}}
+	</div>
+  <div id="ajaxrespuesta">
+    <form action="{% url "presupuestos_view" %}" method="post" id="contactform">
+    {% csrf_token %}
+    {{ form.as_p}}
+      <input type="Submit" value="Generar Presupuesto" name="enviar" class="btn" id="enviarpresu"/>
+  </form>
+
+  </div>
+
+  <form name="formulario" action="#" method="POST">
+    {% csrf_token %}
+    <div class="well">
+      <p>Días laborables semanales:<p>
+
+      <select name="diaslabsemanales">
+        <option value="1">1 D&iacute;a</option>
+          <option value="2">2 D&iacute;as</option>
+          <option value="3">3 D&iacute;as</option>
+          <option value="4">4 D&iacute;as</option>
+          <option value="5">5 D&iacute;as</option>
+          <option value="6">6 D&iacute;as</option>
+          <option value="7">7 D&iacute;as</option>
+      </select>
+
+      <p>Dedicaci&oacute;n diaria (horas):</p>
+      <input name="horaslabproyecto" type="text" size="10" maxlength="2"/>
+    </div>
+
+    <div class="well">
+      <legend>DISTRIBUCI&Oacute;N DE TIEMPOS (horas)</legend>
+      <label>Obtencion de requisitos:</label>
+      <input name="recrequisitos" type="text" size="10" maxlength="10">
+      <label>An&aacute;lisis del proyecto</label>
+      <input name="analisisproyecto" type="text" size="10" maxlength="10">
+      <label>Propuesta de desarrollo:</label>
+      <input name="propdessitioweb" type="text" size="10" maxlength="10">
+      <label>Desarrollo de la el proyecto:</label>
+      <input name="construccionsitioweb" type="text" size="10" maxlength="10">
+      <label>Puesta en marcha:</label>
+      <input name="pmarcha" type="text" size="10" maxlength="10" >
+      <label>Mantenimiento del sitio web:</label>
+      <input name="mantenimientoweb" type="text" size="10" maxlength="10" >
+      <label>Otros:</label>
+      <input name="duracotros" type="text" size="10" maxlength="10" >
+    </div>
+
+
+    <div class="well">
+      <legend>COSTO PROYECTO</legend>
+      <label>Registro de dominio:</label>
+      <input name="dominio" type="text" size="10" maxlength="10" >
+      <label>Alojamiento:</label>
+      <input name="alojamiento" type="text" size="10" maxlength="10" >
+      <label>Software específico:</label>
+      <input name="softwareespecifico" type="text" size="10" maxlength="10" >
+      <label>Otros:</label>
+      <input name="costootros" type="text" size="10" maxlength="10" >
+    </div>
+
+    <div class="well">
+      <legend>COEFICIENTES CORRECTORES</legend>
+      <label>Tipo Cliente</label>
+      <select name="tipocliente" id="tipocliente">
+            <option value="0.9">Nuevo (0.9)</option>
+            <option value="1">Habitual (1)</option>
+            <option value="0.95">Preferente (0.95)</option>
+      </select>
+      <label>Duraci&oacute;n: </label>
+      <select name="varduracion" id="varduracion">
+            <option value="1">1-4 Semanas (1)</option>
+            <option value="0.95">5-12 Semanas (0.95)</option>
+            <option value="0.9">M&aacute;s de 12 semanas (0.9)</option>
+      </select>
+      <label>Dificultad: </label>
+      <select name="dificultad" id="dificultad">
+          <option value="0.9">Baja (0.9)</option>
+          <option value="0.95">Media (0.95)</option>
+          <option value="1">Alta (1)</option>
+      </select>
+    </div>
+
+
+
+
+
+
+
+
+
+
+

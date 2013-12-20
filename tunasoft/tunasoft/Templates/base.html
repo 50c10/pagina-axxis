@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}Axxis{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+        <style>
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        <link rel="stylesheet" href="/static/css/main.css">
+
+        <script src="/static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+
+        <div class="navbar-default" id="menu" role="navigation">
+            <div class="navbar-inner">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand" href="{% url "vista_principal"%}"><img src="/static/img/logo.png"></a>
+                </div>
+                    
+                    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="{% url "vista_about"%}" >About</a></li>
+                            <li><a href="{% url "vista_contact"%}" >Contact</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url "web_view"%}">Diseño Web</a></li>
+                                    <li><a href="{% url "sistemas_view"%}">Sistemas a medida</a></li>
+                                    <li><a href="{% url "movil_view"%}">Aplicaciones moviles</a></li>
+                                    <li class="divider"></li>
+                                    <li class="nav-header">Nav header</li>
+                                    <li><a href="{% url "equipo_view"%}">Equipo</a></li>
+                                    <li><a href="{% url "instalaciones_view"%}">Instalaciones</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        {% if user.is_authenticated %}
+                            <div class="pull-right">
+                                <ul class="nav pull-right">
+                                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido, {{user.username}} <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{% url "preferences_view"%}"><i class="icon-cog"></i> Preferences</a></li>
+                                            <li><a href="{% url "dashboard_view"%}"><i class="icon-envelope"></i> Dashboard</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{% url "logout_view"%}"><i class="icon-off"></i> Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% else %}
+                        <form class="navbar-form pull-right" action="/login/" method="post" accept-charset="utf-8">
+                            {% csrf_token %}
+                            <input class="span2" type="text" placeholder="Usuario" id="id_username" name="username">
+                            <input class="span2" type="password" placeholder="Password" id="id_password" name="password">
+                            <button type="submit" class="btn">LogIn</button>
+                        </form>
+                        {% endif %}
+                    </div><!--/.nav-collapse -->
+                    <script type="text/javascript">
+                        $('a[href="${fn:substringBefore(pageContext.request.requestURI, '.')}"]').parent().addClass('active');
+                    </script>
+           
+            </div>
+        </div>
+
+        <div>
+
+            {% block content %}
+            {% endblock %}
+            
+
+        </div> <!-- /container -->
+       <footer>
+            <div class="container-full">
+               <div class="" id="footer1">
+                  <div class="col-md-2 col-md-offset-1">
+                    <h4>Servicios</h4>
+                    <ul class="list-unstyled">
+                        <li>Redes</li>
+                        <li>Sistemas</li>
+                        <li>Mantenimiento</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-2 col-md-offset-1">
+                    <h4>Contacto</h4>
+                    <ul class="list-unstyled">
+                        <li>Redes</li>
+                        <li>Sistemas</li>
+                        <li>Mantenimiento</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-2 col-md-offset-1">
+                    <h4>Acerca de</h4>
+                    <ul class="list-unstyled">
+                        <li>Redes</li>
+                        <li>Sistemas</li>
+                        <li>Mantenimiento</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-2 col-md-offset-1">
+                    <h4>Siguenos en ..</h4>
+                    <ul class="list-unstyled">
+                        <li>Twitter</li>
+                        <li>Facebook</li>
+                        <li>Youtube</li>
+                    </ul>
+                  </div>
+               </div>
+               <div class="" id="footer2">
+                    <p class="text-right">AxxisComputo &copy; 2013</p>
+               </div>
+            </div>
+        </footer>
+      <!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
+        <script>window.jQuery || document.write('<script src="/static/js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
+
+        <script src="/static/js/vendor/bootstrap.min.js"></script>
+
+        <script src="/static/js/main.js"></script>
+<!-- asdasd
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+-->
+    </body>
+</html>

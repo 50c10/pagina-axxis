@@ -1,0 +1,15 @@
+<div id="ajaxrespuesta">
+	{% if mensaje != nada %}
+
+		<form action="{% url "presupuestos2_view" %}" method="post" id="contactform">
+    	{% csrf_token %}
+    	{{ form.as_p}}
+      	<input type="Submit" value="Generar Presupuesto" name="enviar" class="btn" id="enviarpresu"/>
+    {% else %}
+    	<h3>Resultado de el presupuesto</h3>
+
+
+		Este es el resultado {{mensaje}}
+	{% endif %}
+
+</div>
